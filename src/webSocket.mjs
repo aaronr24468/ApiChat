@@ -1,7 +1,7 @@
 import { WebSocketServer } from "ws";
 
-export const initWebSocket = () => {
-    const wss = new WebSocketServer({ port: 8181 })
+export const initWebSocket = (server) => {
+    const wss = new WebSocketServer({ server })
     let connections = {}
     let imageConnection = {}
 
@@ -13,16 +13,20 @@ export const initWebSocket = () => {
 
             switch (data.type) {
                 case 'join':
-                    connections[data.name] = ws;
-                    imageConnection[data.name] = data.imageUser
-                    msg = JSON.stringify({
-                        "type": 'join',
-                        "names": Object.keys(connections),
-                        "imageUsers": imageConnection
-                    })
-                    Object.values(connections).forEach((connection) => {
-                        connection.send && connection.send(msg)
-                    })
+
+                    if (data.name != null) {
+                        connections[data.name] = ws;
+                        imageConnection[data.name] = data.imageUser
+                        msg = JSON.stringify({
+                            "type": 'join',
+                            "names": Object.keys(connections),
+                            "imageUsers": imageConnection
+                        })
+                        Object.values(connections).forEach((connection) => {
+                            connection.send && connection.send(msg)
+                        })
+                    }
+
                     break;
 
                 case 'msg':
@@ -39,7 +43,7 @@ export const initWebSocket = () => {
                         }))
 
                     }
-                    
+
                     break;
                 case 'logout':
                     delete connections[data.name]
@@ -51,7 +55,7 @@ export const initWebSocket = () => {
                     })
                     Object.values(connections).forEach((connection) => {
                         connection.send && connection.send(msg)
-                    })  
+                    })
                     break;
             }
             // Object.values(connections).forEach((connection) =>{

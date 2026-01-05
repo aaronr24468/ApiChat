@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { getImageUser, getMessages, getUserD, getUserPhoto, saveMessage, setConnected } from "../controllers/controllers.mjs";
+import { checkUser, getImageUser, getMessages, getUserD, getUserPhoto, logOut, saveMessage, setConnected } from "../controllers/controllers.mjs";
 import multer from "multer";
 import {dirname, join} from 'path';
 import { fileURLToPath } from "url";
@@ -19,6 +19,8 @@ export const router = Router();
 
 router.get('/getUser', getUserD);
 
+router.get('/checkUser', checkUser)
+
 router.get('/getUserPhoto', getUserPhoto);
 
 router.post('/setImage', getImage, getImageUser);
@@ -28,3 +30,5 @@ router.post('/setConnected', setConnected);
 router.post('/saveMessage', saveMessage);
 
 router.post('/getMessages', getMessages);
+
+router.get('/logout', logOut)

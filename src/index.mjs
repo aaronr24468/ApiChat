@@ -19,7 +19,7 @@ const app = express();
 const server = createServer(app)
 
 app.use(cors({
-    origin: 'http://localhost:5173',
+    origin: 'https://chatty-ff143.firebaseapp.com',
     credentials: true
 }));
 app.use(morgan('dev'));

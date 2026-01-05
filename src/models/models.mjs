@@ -14,13 +14,6 @@ const connection = mysql.createPool({
     connectTimeout: 10000
 });
 
-await connection.connect((err) =>{
-    if(err){
-        console.error(err)
-    }else{
-        console.log("Connected")
-    } 
-})
 
 export const registerU = async(data) =>{
     const query = 'INSERT INTO users(name , lastname, day, month, year, username, password,connected, image) values(?,?,?,?,?,?,?,?,?)';

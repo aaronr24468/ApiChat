@@ -124,7 +124,7 @@ export const getMessages = async (request, response) => {
 export const logOut = (request, response) => {
     try {
         response.clearCookie('chatToken', {
-            secure: false,
+            secure: true,
             sameSite: 'none',
             partitioned: true
         })

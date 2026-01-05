@@ -14,7 +14,7 @@ export const initWebSocket = (server) => {
             switch (data.type) {
                 case 'join':
 
-                    if (data.name != null) {
+                    if (data.name != null || data.name != undefined) {
                         connections[data.name] = ws;
                         imageConnection[data.name] = data.imageUser
                         msg = JSON.stringify({

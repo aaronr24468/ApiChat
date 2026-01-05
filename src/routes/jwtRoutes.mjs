@@ -16,7 +16,7 @@ router.post('/', async(request, response) =>{
             const token = jwt.sign(payload, 'secret')
             response.cookie('chatToken', token,{
                 httpOnly: true,
-                secure: false,
+                secure: true,
                 sameSite: 'none',
                 partitioned: true
             });
